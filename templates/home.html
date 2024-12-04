@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOS</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #ECE2E2;
+        }
+
+        .sos-button {
+            position: relative;
+            width: 80vw;
+            height: 100vh !important;
+            max-width: 300px;
+            max-height: 300px;
+            background-color: #894444;
+            border-radius: 50%;
+            border: 5px solid #DA6F71;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Bagel Fat One', cursive;
+            font-size: 10vw;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+
+        }
+
+        .ither{
+            top: 500px !important;
+        }
+
+        .sos-button:hover {
+            transform: scale(1.1);
+        }
+
+        .circle {
+            position: absolute;
+            width: 100vw;
+            height: 100vw;
+            max-width: 400px;
+            max-height: 400px;
+            background-color: #894444;
+            border-radius: 50%;
+            animation: expand 2s ease-in-out infinite;
+        }
+
+        @keyframes expand {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .sos-button {
+                width: 200px;
+                height: 200px;
+                font-size: 60px;
+            }
+
+            .circle {
+                width: 300px;
+                height: 300px;
+            }
+        }
+
+    
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sos-button" id="sos-button">
+        <div class="circle"></div>
+        SOS
+    </div>
+   
+
+    <script>
+        document.getElementById('sos-button').addEventListener('click', () => {
+            fetch('{{ url_for("home") }}', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('SOS signal sent!');
+                }
+            })
+             
+        });
+    </script>
+</body>
+</html>
